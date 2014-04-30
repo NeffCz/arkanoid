@@ -9,6 +9,7 @@
 *.exe
 *.mdb
 *.log
+*.userprefs
 
 # Build results
 [Dd]ebug/
