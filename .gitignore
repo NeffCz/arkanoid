@@ -5,6 +5,10 @@
 *.suo
 *.user
 *.sln.docstates
+*.dll
+*.exe
+*.mdb
+*.log
 
 # Build results
 [Dd]ebug/
