@@ -1,5 +1,5 @@
 ﻿using System;
-using MonoMac.Foundation;
+//using MonoMac.Foundation;
 using WaveEngine.Framework.Services;
 using WaveEngine.Framework.Graphics;
 using WaveEngine.Common.Math;
@@ -10,7 +10,7 @@ using WaveEngine.Common.Input;
 
 namespace Antinoid
 {
-	[Register ("AppDelegate")]
+	//[Register ("AppDelegate")]
 	public class App : WaveEngine.Adapter.Application
 	{
 		AntinoidProject.Game game;

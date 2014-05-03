@@ -1,6 +1,7 @@
 ﻿#region Using Statements
 using System;
 using WaveEngine.Common;
+using WaveEngine.Common.Math;
 using WaveEngine.Common.Graphics;
 using WaveEngine.Framework;
 using WaveEngine.Framework.Services;
@@ -46,12 +47,15 @@ namespace AntinoidProject
 		protected override void CreateScene ()
 		{
 			RenderManager.BackgroundColor = Color.Black;
-
+            RenderManager.DebugLines = true;
 			//Insert your code here
 			var barTop = new Entity ("barTop")
 					.AddComponent (new Sprite ("Content/Texture/wall.wpk"))
 					.AddComponent (new SpriteRenderer (DefaultLayers.Alpha))
-				.AddComponent (new RectangleCollider ())
+                .AddComponent(new RectangleCollider()
+                {
+                    DebugLineColor = Color.Green
+                })
 				.AddComponent (new Transform2D () {
 				XScale = 800
 			});
@@ -59,14 +63,20 @@ namespace AntinoidProject
 			var barLeft = new Entity ("barLeft")
 				.AddComponent (new Sprite ("Content/Texture/wall.wpk"))
 				.AddComponent (new SpriteRenderer (DefaultLayers.Alpha))
-				.AddComponent (new RectangleCollider ())
+                .AddComponent(new RectangleCollider()
+                {
+                    DebugLineColor = Color.Green
+                })
 				.AddComponent (new Transform2D () {
 					YScale = 600
 				});
 			var barRight = new Entity ("barRight")
 				.AddComponent (new Sprite ("Content/Texture/wall.wpk"))
 				.AddComponent (new SpriteRenderer (DefaultLayers.Alpha))
-				.AddComponent (new RectangleCollider ())
+                .AddComponent(new RectangleCollider()
+                {
+                    DebugLineColor = Color.Green
+                })
 				.AddComponent (new Transform2D () {
 					YScale = 600,
 					X = WaveServices.Platform.ScreenWidth - 10
@@ -76,7 +86,10 @@ namespace AntinoidProject
 			var barBot = new Entity ("barBot")
 				.AddComponent (new Sprite ("Content/Texture/wall.wpk"))
 				.AddComponent (new SpriteRenderer (DefaultLayers.Alpha))
-				.AddComponent (new RectangleCollider ())
+                .AddComponent(new RectangleCollider()
+                {
+                    DebugLineColor = Color.Green
+                })
 				.AddComponent (new Transform2D () {
 					XScale = 800,
 					Y = WaveServices.Platform.ScreenHeight - 10
@@ -88,17 +101,35 @@ namespace AntinoidProject
 			EntityManager.Add (barBot);
 
 
+            var brick = new Entity("brick")
+                .AddComponent(new Sprite("Content/Texture/brickSmallR.wpk"))
+                .AddComponent(new SpriteRenderer(DefaultLayers.Alpha))
+                .AddComponent(new RectangleCollider()
+                {
+                    DebugLineColor = Color.Green
+                })
+                .AddComponent(new Transform2D()
+                {
+                    X = WaveServices.Platform.ScreenWidth / 2 - 50,
+                    Y = WaveServices.Platform.ScreenHeight / 2 - 25
+                });
+
+            EntityManager.Add(brick);
 
 			var ball = new Entity("ball")
 				.AddComponent(new Sprite("Content/Texture/ball.wpk"))
 				.AddComponent(new SpriteRenderer(DefaultLayers.Alpha))
-				.AddComponent(new PerPixelCollider("Content/Texture/ball.wpk",1f))
+                .AddComponent(new CircleCollider()
+                {
+                    DebugLineColor = Color.Green
+                })
 				.AddComponent(new Transform2D()
 					{
+                        Origin = new Vector2(0.5f,0.5f),
 						Y = WaveServices.Platform.ScreenHeight / 2,
 						X = WaveServices.Platform.ScreenWidth / 2
-					})
-				.AddComponent(new BallBehavior(null, barBot, barTop, barLeft, barRight));
+					});
+				ball.AddComponent(new BallBehavior(null, barBot, barTop, barLeft, barRight, brick));
 
 			EntityManager.Add (ball);
 		}
