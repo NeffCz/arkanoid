@@ -47,7 +47,7 @@ namespace AntinoidProject
 		protected override void CreateScene ()
 		{
 			RenderManager.BackgroundColor = Color.Black;
-            RenderManager.DebugLines = true;
+            //RenderManager.DebugLines = true;
 			//Insert your code here
 			var barTop = new Entity ("barTop")
 					.AddComponent (new Sprite ("Content/Texture/wall.wpk"))
@@ -57,7 +57,7 @@ namespace AntinoidProject
                     DebugLineColor = Color.Green
                 })
 				.AddComponent (new Transform2D () {
-				XScale = 800
+				XScale = 80
 			});
 
 			var barLeft = new Entity ("barLeft")
@@ -68,7 +68,7 @@ namespace AntinoidProject
                     DebugLineColor = Color.Green
                 })
 				.AddComponent (new Transform2D () {
-					YScale = 600
+					YScale = 60
 				});
 			var barRight = new Entity ("barRight")
 				.AddComponent (new Sprite ("Content/Texture/wall.wpk"))
@@ -78,7 +78,7 @@ namespace AntinoidProject
                     DebugLineColor = Color.Green
                 })
 				.AddComponent (new Transform2D () {
-					YScale = 600,
+					YScale = 60,
 					X = WaveServices.Platform.ScreenWidth - 10
 				});
 
@@ -91,9 +91,11 @@ namespace AntinoidProject
                     DebugLineColor = Color.Green
                 })
 				.AddComponent (new Transform2D () {
-					XScale = 800,
-					Y = WaveServices.Platform.ScreenHeight - 10
-				});
+					XScale = 8,
+					Y = WaveServices.Platform.ScreenHeight - 10,
+                    X = WaveServices.Platform.ScreenWidth/2 - 40
+				})
+                .AddComponent(new PlayerBehavior());
 
 			EntityManager.Add (barTop);
 			EntityManager.Add (barLeft);
